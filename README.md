@@ -30,3 +30,55 @@
 	<artifactId>jstl</artifactId>
 </dependency>
 ```
+
+```DB 설정
+create user 'costa'@'%' identified by 'costa1234';
+GRANT ALL PRIVILEGES ON *.* TO 'costa'@'%';
+create database costa;
+```
+
+
+```yml.설정
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+    
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+      
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/costa?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true
+    username: costa
+    password: costa1234
+    
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+      
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2MB
+
+  security:
+    user:
+      name: test
+      password: 1234   
+
+file:
+  path: C:/src/instagram/src/main/resources/upload/
+ ```
+
+
