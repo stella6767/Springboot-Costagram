@@ -23,7 +23,7 @@
                         
                         
                         <form class="login__input" action="/login" method="post">
-                            <input type="text" name="id" placeholder="전화번호, 사용자 이름 또는 이메일">
+                            <input type="text" name="username" placeholder="전화번호, 사용자 이름 또는 이메일">
                             <input type="password" name="password" id="password" placeholder="비밀번호">
                             <button>로그인</button>
                         </form>

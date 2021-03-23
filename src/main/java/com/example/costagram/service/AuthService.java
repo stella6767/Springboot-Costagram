@@ -25,9 +25,7 @@ public class AuthService {
 		user.setPassword(encPassword);
 		user.setRole("USER");
 		
-		
-		userRepository.save(user);
-		
+		userRepository.save(user);	
 	}
 	
 	
