@@ -46,6 +46,8 @@ public class User {
 	
 	private String role; //USER, ADMIN
 	
+	private String profileImageUrl;
+	
 	@CreationTimestamp
 	private Timestamp createDate;
 
