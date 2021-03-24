@@ -1,15 +1,18 @@
 package com.example.costagram.domain.user;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.example.costagram.domain.image.Image;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -46,6 +49,9 @@ public class User {
 	
 	private String role; //USER, ADMIN
 	
+	@OneToMany(mappedBy = "user") //당근 lazyloading
+	private List<Image> images;
+		
 	private String profileImageUrl;
 	
 	@CreationTimestamp

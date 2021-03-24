@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.costagram.service.AuthService;
 import com.example.costagram.utils.Script;
-import com.example.costagram.web.auth.dto.UserJoinReqDto;
+import com.example.costagram.web.dto.auth.UserJoinReqDto;
 
 import lombok.RequiredArgsConstructor;
 

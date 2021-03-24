@@ -41,7 +41,7 @@ public class Image {
     @JoinColumn(name="userId")
     private User user;
     
-    @OneToMany(mappedBy = "image")
+    @OneToMany(mappedBy = "image") //mappedBy 칼럼 안 생김을 명시
     private List<Tag> tags;
     
     @OneToMany(mappedBy = "image")
