@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.example.costagram.domain.comment.Comment;
 import com.example.costagram.domain.likes.Likes;
 import com.example.costagram.domain.tag.Tag;
 import com.example.costagram.domain.user.User;
@@ -34,7 +35,7 @@ public class Image {
 	private int id; 
 	
 	private String caption; //오늘 나 너무 피곤했어!!
-    private String ppostImageUrl;
+    private String postImageUrl;
     
     @ManyToOne
     @JoinColumn(name="userId")
@@ -46,9 +47,12 @@ public class Image {
     @OneToMany(mappedBy = "image")
     private List<Likes> likes; //A 이미지에 홍길동, 장보고, 임꺽정 좋아요. (고소영)
     
-    //follow 정보
-    //comment(댓글)
     
+    @OneToMany(mappedBy = "image")
+    private List<Comment> comments;
+    
+    
+  //follow 정보
     
     @CreationTimestamp
     private Timestamp createDate;
