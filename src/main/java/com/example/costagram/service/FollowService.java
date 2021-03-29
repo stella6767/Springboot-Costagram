@@ -1,10 +1,9 @@
 package com.example.costagram.service;
 
-import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.example.costagram.domain.follow.Follow;
 import com.example.costagram.domain.follow.FollowReposiotry;
 
 import lombok.RequiredArgsConstructor;

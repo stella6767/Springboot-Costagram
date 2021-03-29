@@ -1,7 +1,5 @@
 package com.example.costagram.domain.follow;
 
-import javax.transaction.Transactional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,5 +17,11 @@ public interface FollowReposiotry extends JpaRepository<Follow, Integer>{
 	@Modifying
 	@Query(value = "DELETE FROM follow WHERE fromUserId = :fromUserId AND toUserId = :toUserId", nativeQuery = true)
 	int mUnfollow(int fromUserId, int toUserId); //prepareStatement updateQuery() => -1,1,0
+	
+	@Query(value = "select count(*) from follow where fromUserId = :principalId AND toUserId = :userId", nativeQuery = true)
+	int mFollowState(int principalId, int userId);
+
+	@Query(value = "select count(*) from follow where fromUserId = :userId", nativeQuery = true)
+	int mFollowCount(int userId);
 
 }

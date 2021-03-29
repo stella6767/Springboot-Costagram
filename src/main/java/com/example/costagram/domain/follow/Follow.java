@@ -36,7 +36,6 @@ public class Follow {
 	@ManyToOne
 	private User toUser; // ~~ 를, 팔로우 당하는 사람
 	
-	
 	@CreationTimestamp
 	private Timestamp createDate;
 }

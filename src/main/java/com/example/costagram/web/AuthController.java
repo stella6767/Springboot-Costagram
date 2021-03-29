@@ -29,11 +29,9 @@ public class AuthController {
 	}	
 	
 	@PostMapping("/auth/join")
-	public @ResponseBody String join(UserJoinReqDto userJoinReqDto) {
-				
+	public @ResponseBody String join(UserJoinReqDto userJoinReqDto) {				
 		System.out.println("들어옴");
-		authService.회원가입(userJoinReqDto.toEntity());
-			
+		authService.회원가입(userJoinReqDto.toEntity());		
 		return Script.href("성공", "/auth/loginForm");
 		//return "redirect:loginForm";
 	}

@@ -1,8 +1,5 @@
 package com.example.costagram.config.auth;
 
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,8 +26,9 @@ public class PrincipalDetailsService implements UserDetailsService {
 		// 로그인이 완료 되면 '/' 로 가게끔 작성
 
 		User principal = userRepository.findByUsername(username); //시큐리티가 비밀번호는 알아서 막아주므로 name만 찾으면 됨
-		System.out.println("찾았다면:  "+principal);
-
+		//syso(userEntitiy) 때리지 마셈!!!! lazyLoding 인데 getter가 때려짐 	 로그 남기지 마셈!!!!
+		
+		
 		if (principal == null) {
 			return null;
 //			throw new IllegalArgumentException(); //비번은 못 막음 할려면 인코딩 복호화해서 다시 찾아야됨.

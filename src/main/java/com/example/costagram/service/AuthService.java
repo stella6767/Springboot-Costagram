@@ -2,6 +2,7 @@ package com.example.costagram.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.costagram.domain.user.User;
 import com.example.costagram.domain.user.UserRepository;
@@ -16,7 +17,7 @@ public class AuthService {
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	
-	
+	@Transactional
 	public void 회원가입(User user){
 		
 		String rawPassword = user.getPassword(); //만약 암호화를 다른 곳에서도 계속 쓴다면 uils 패키지에 함수화하는게 좋다.

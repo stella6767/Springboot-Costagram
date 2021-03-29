@@ -35,7 +35,6 @@ public class Tag {
 	@JoinColumn(name = "imageId")
 	private Image image;
 	
-	
     @CreationTimestamp
     private Timestamp createDate;
 

@@ -1,9 +1,7 @@
 package com.example.costagram.config;
 
-import org.aspectj.weaver.ast.And;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -36,7 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.loginProcessingUrl("/login") //post /login 주소를 디스패처가 확인하면 필터가 낚아챔
 		.defaultSuccessUrl("/");
 		//OAuth2.0 과 CORS는 나중에
-		
 	}
 	
 }

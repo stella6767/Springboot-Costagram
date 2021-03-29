@@ -2,6 +2,7 @@ package com.example.costagram.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.example.costagram.domain.image.Image;
@@ -9,11 +10,15 @@ import com.example.costagram.domain.image.ImageRepository;
 
 import lombok.RequiredArgsConstructor;
 
+
 @RequiredArgsConstructor
 @Service
 public class ImageService {
 
 	private final ImageRepository imageRepository;
+	
+	@Value("${file.path}")  //@Value 안의 ${} 안으로 application.yml 의 설정을 바로 땡겨올 수 있음.     
+	private String uploadFolder;
 	
 	public List<Image> 피드이미지(int principalId){
 		

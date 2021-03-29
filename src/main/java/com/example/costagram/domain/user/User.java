@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,7 +50,7 @@ public class User {
 	
 	private String role; //USER, ADMIN
 	
-	@OneToMany(mappedBy = "user") //당근 lazyloading
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Image> images;
 		
 	private String profileImageUrl;
