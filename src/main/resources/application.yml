@@ -37,5 +37,7 @@ spring:
       name: test
       password: 1234   
 
+
 file:
-  path: C:/src/instagram/src/main/resources/upload/
+  path: C:/Users/admin/Downloads/stsWork/reactorWork/costagram/src/main/resources/upload/
+

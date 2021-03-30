@@ -2,6 +2,8 @@
 
 <%@ include file="../layout/header.jsp"%>
 
+<input type = "hidden" id="userId" value="${dto.user.id}" />
+
 <!--프로필 섹션-->
 <section class="profile">
 	<!--유저정보 컨테이너-->
@@ -79,7 +81,7 @@
 				
 					<div class="img-box">
 						<a href="">
-							<img src="/images/profile.jpeg" alt="">
+							<img src="/upload/${image.postImageUrl}" alt="">
 						</a>
 						<div class="comment">
 							<a href="#a" class="">
@@ -132,30 +134,13 @@
 		<!--팔로워 헤더end-->
 
 		<!--팔로워 리스트-->
-		<div class="follower-list">
-			<div class="follower__item">
-				<div class="follower__img">
-					<img src="/images/profile.jpeg" alt="">
-				</div>
-				<div class="follower__text">
-					<h2>아이디</h2>
-				</div>
-				<div class="follower__btn">
-					<button onclick="clickFollow(this)">구독취소</button>
-				</div>
-			</div>
-			<div class="follower__item">
-				<div class="follower__img">
-					<img src="/images/profile.jpeg" alt="">
-				</div>
-				<div class="follower__text">
-					<h2>아이디</h2>
-				</div>
-				<div class="follower__btn">
-					<button onclick="clickFollow(this)">구독취소</button>
-				</div>
-			</div>
+		<div class="follower-list" id="follow_list">
+		
+			
+			
+			
 		</div>
+		
 		<!--팔로워 리스트end-->
 	</div>
 	<!--팔로워 박스end-->

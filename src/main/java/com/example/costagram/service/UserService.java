@@ -19,19 +19,20 @@ public class UserService {
 	
 	@Transactional(readOnly = true)
 	public UserProfileRespDto 회원프로필(int userId, int principalId) {
-		
 		UserProfileRespDto userProfileRespDto = new UserProfileRespDto();
 		
-		User userEntity = userRepository.findById(userId).orElseThrow(()->{
-			return new IllegalArgumentException("id를 찾을 수 없습니다.");
+		User userEntity = userRepository.findById(userId).orElseThrow(()-> {
+			return new IllegalArgumentException();
 		});
 		
+		int followState = followRepository.mFollowState(principalId, userId);
+		int followCount = followRepository.mFollowCount(userId);
+		System.out.println(followState == 1);
 		
-		userProfileRespDto.setFollowState(true);
-		userProfileRespDto.setFollowCount(100); // 내가 팔로우 하고 있는 카운트
-		userProfileRespDto.setImageCount(10);
+		userProfileRespDto.setFollowState(followState == 1);
+		userProfileRespDto.setFollowCount(followCount); // 내가 팔로우 하고 있는 카운트
+		userProfileRespDto.setImageCount(userEntity.getImages().size());
 		userProfileRespDto.setUser(userEntity);
-	
 		
 		return userProfileRespDto;
 	}
