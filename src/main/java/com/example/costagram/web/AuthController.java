@@ -32,7 +32,7 @@ public class AuthController {
 	public @ResponseBody String join(UserJoinReqDto userJoinReqDto) {				
 		System.out.println("들어옴");
 		authService.회원가입(userJoinReqDto.toEntity());		
-		return Script.href("성공", "/auth/loginForm");
+		return Script.href("회원가입에 성공하셨습니다.", "/auth/loginForm");
 		//return "redirect:loginForm";
 	}
 	
