@@ -32,7 +32,14 @@ public class UserService {
 		userProfileRespDto.setFollowState(followState == 1);
 		userProfileRespDto.setFollowCount(followCount); // 내가 팔로우 하고 있는 카운트
 		userProfileRespDto.setImageCount(userEntity.getImages().size());
+		
+		userEntity.getImages().forEach((image) ->{
+			image.setLikeCount(image.getLikes().size());
+		});//굳이 likeCount 집어넣을 필요없이 userEntity의 image의 사이즈 들고오면 되지만, 뷰에서 연산을 최소화하기 위해 set해주는 작업을 거치자.
+		
 		userProfileRespDto.setUser(userEntity);
+		
+		
 		
 		return userProfileRespDto;
 	}

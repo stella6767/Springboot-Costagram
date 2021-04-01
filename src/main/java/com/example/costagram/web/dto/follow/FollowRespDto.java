@@ -16,5 +16,4 @@ public class FollowRespDto {
 	private String profileImageUrl;
 	private BigInteger followState; //값은 BigInteget로 받아야함
 	private BigInteger equalState;
-
 }

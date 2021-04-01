@@ -21,7 +21,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
@@ -36,7 +36,18 @@ spring:
     user:
       name: test
       password: 1234   
-
+    
+    
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 904669920371111
+            client-secret: cbd99ba1b149d9490ddc4195e25a57d9
+            scope:
+            - email
+            - public_profile
+    
 
 file:
   path: C:/Users/admin/Downloads/stsWork/reactorWork/costagram/src/main/resources/upload/
