@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.costagram.config.auth.PrincipalDetails;
@@ -18,6 +21,7 @@ import com.example.costagram.service.UserService;
 import com.example.costagram.web.dto.CMRespDto;
 import com.example.costagram.web.dto.follow.FollowRespDto;
 import com.example.costagram.web.dto.user.UserProfileRespDto;
+import com.example.costagram.web.dto.user.UserUpdateReqDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -50,8 +54,23 @@ public class UserController {
 	}
 	
 	@GetMapping("/user/{id}/profileSetting")
-	public String profileSetting(@PathVariable int id) {
+	public String profileSetting(@PathVariable int id, Model model,  @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+//		UserProfileRespDto userProfileRespDto = userService.회원프로필(id, principalDetails.getUser().getId());	
+//		model.addAttribute("dto", userProfileRespDto);		
 		return "user/profileSetting";
+	}
+	
+	
+	@PutMapping("/user/{id}")
+	public @ResponseBody CMRespDto<?> profileUpdate(@PathVariable int id, User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+			
+		System.out.println(user);
+		
+		User userEntity = userService.회원수정(id, user);
+		principalDetails.setUser(userEntity);
+	
+		return new CMRespDto<>(1, null);
 	}
 	
 }

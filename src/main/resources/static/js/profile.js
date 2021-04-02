@@ -25,7 +25,7 @@ document.querySelector("#subscribeBtn").onclick = (e) => {
 function makeSubscribeInfo(u) {
 	let item = `<div class="follower__item" id="follow-${u.userId}">`;
 	item += `<div class="follower__img">`;
-	item += `<img src="/images/profile.jpeg" alt="">`;
+	item += `<img src="/upload/${u.profileImageUrl}" alt=""  onerror="this.src='/images/person.jpg'"/>`;
 	item += `</div>`;
 	item += `<div class="follower__text">`;
 	item += `<h2>${u.username}</h2>`;
@@ -97,6 +97,29 @@ function followOrUnFollowProfile(userId){
 	}
 }
 
+
+
+    function update(userId){ //회원정보 수정
+    	
+    	event.preventDefault();
+    	
+    	let data = $("#profile_setting").serialize();	  
+    	//form 태그의 name 값을 그대로 받아서 키 값 형태로 전달받음, let은 타입을 자동으로 정하니 아마도 String? 그냥 거의 다 String으로 받는다고 생각하면 됨. int도 아마 number로 캐스팅해줘야 될 듯.
+    	console.log(data);  
+    	
+    	
+    	$.ajax({
+    		type:"PUT",
+			url:"/user/"+userId,
+			data: data,
+			contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			dataType:"JSON"	
+    	}).done(res=>{
+    		alert("수정 성공");
+    		location.href = "/user/" + userId
+    	});
+    	
+    }
 
 
 /*$("#follow-1 button").text("구독하기");

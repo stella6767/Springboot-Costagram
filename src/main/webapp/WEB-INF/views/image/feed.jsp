@@ -7,13 +7,13 @@
 		<article class="story-list">
 
 
-			<c:forEach var="image" items="${images}">
+			<c:forEach var="image" items="${images}" begin="1" end="3">
 				<!--전체 리스트 아이템-->
 				<div class="story-list__item">
 					<!--리스트 아이템 헤더영역-->
 					<div class="sl__item__header">
 						<div>
-							<img src="/images/profile.jpeg" alt="" />
+							<img src="/upload/${image.user.profileImageUrl }" alt=""  onerror="this.src='/images/person.jpg' " />
 							<svg viewbox="0 0 110 110">
                   <circle cx="55" cy="55" r="53" />
                 </svg>
