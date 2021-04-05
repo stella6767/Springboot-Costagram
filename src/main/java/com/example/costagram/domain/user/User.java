@@ -15,6 +15,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.example.costagram.domain.image.Image;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -50,6 +51,8 @@ public class User {
 	
 	private String role; //USER, ADMIN
 	
+
+	@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Image> images;
 		

@@ -1,5 +1,8 @@
 package com.example.costagram.web;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.data.domain.Sort;
 
 import com.example.costagram.config.auth.PrincipalDetails;
+import com.example.costagram.domain.image.Image;
 import com.example.costagram.service.ImageService;
 import com.example.costagram.service.LikeService;
 import com.example.costagram.web.dto.CMRespDto;
@@ -26,15 +31,27 @@ public class ImageController {
 	
 	
 	@GetMapping({"/","/image/feed"})
-	public String feed(Model model, @AuthenticationPrincipal PrincipalDetails details) {
+	public String feed(Model model, @AuthenticationPrincipal PrincipalDetails details, @PageableDefault(sort = "id",direction = Sort.Direction.DESC, size = 3) Pageable pageable) {
 		
 		//ssar이 누구를 팔로우 했는지 정보를 알아야함. -> cos
 		// ssar => image 1 (cos),image 2(cos)
 		
-		model.addAttribute("images", imageService.피드이미지(details.getUser().getId()));
+		//model.addAttribute("images", imageService.피드이미지(details.getUser().getId(), pageable));		
+		
 		
 		return "image/feed";
 	}
+	
+	// 주소: /image?page=0   자동으로 이렇게 먹음
+	@GetMapping("/image")
+	public @ResponseBody CMRespDto<?> image(Model model, @AuthenticationPrincipal PrincipalDetails details, @PageableDefault(sort = "id",direction = Sort.Direction.DESC, size = 3) Pageable pageable) {
+		
+		Page<Image> pages = imageService.피드이미지(details.getUser().getId(), pageable);
+		
+		return new CMRespDto<>(1, pages); //MessageConverter 발동 = Jackson = 무한참조
+	}
+	
+	
 	
 	@GetMapping("/image/explore")
 	public String explore(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {

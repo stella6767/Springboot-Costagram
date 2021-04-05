@@ -40,20 +40,25 @@ public class Image {
 	private String caption; //오늘 나 너무 피곤했어!!
     private String postImageUrl;
     
+    @JsonIgnoreProperties({"images"})
     @ManyToOne
     @JoinColumn(name="userId")
     private User user;
     
+
+	@JsonIgnoreProperties({"image"})
     @OneToMany(mappedBy = "image") //mappedBy 하면 테이블의 칼럼 안 생김을 명시
     private List<Tag> tags;
     
+	@JsonIgnoreProperties({"image"})
     @OneToMany(mappedBy = "image")
     private List<Likes> likes; //A 이미지에 홍길동, 장보고, 임꺽정 좋아요. (고소영)
     
+	@JsonIgnoreProperties({"image"})
     @OneToMany(mappedBy = "image")
     private List<Comment> comments;
     
-  //follow 정보 나중
+  //follow 정보 나중x`
     
     @CreationTimestamp
     private Timestamp createDate;
