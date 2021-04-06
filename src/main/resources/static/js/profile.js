@@ -169,3 +169,51 @@ function clickFollow(e) {
 		_btn.style.border = "0";
 	}
 }
+
+
+//프로필 사진 변경
+function profileImageUpload(){
+
+      let principalId = $("#principal-id").val();
+      
+      $("#profile-image_input").click();
+
+      $("#profile-image_input").on("change", (e)=>{
+         let files = e.target.files;
+         let filesArr = Array.prototype.slice.call(files);
+         filesArr.forEach((f)=>{
+            if(!f.type.match("image.*")){
+               alert("이미지를 등록해야 합니다.");
+               return;
+            }
+
+            // 통신 시작
+            let profileImageForm = $("#profile-image_form")[0];
+            
+            let formData = new FormData(profileImageForm); // Form태그 데이터 전송 타입을 multipart/form-data 로 만들어줌.
+
+            $.ajax({
+               type: "put",
+               url: "/user/"+principalId+"/profileImageUrl",
+               data: formData, //formData 자체레 encType 걸림
+               contentType: false, //필수, 안 걸면 디펄트 x-www-form-urlencoded로 파싱됨. 이 파싱을 막아야 되기 때문에 false.
+               processData: false, //필수 : contentType을 false로 줬을 때 쿼리 스트링으로 자동 설정됨. 그거 해제 하는 법
+               encType : "multipart/form-data", //필수 아님, 파일을 넣을거면 필수(e)
+               dataType: "json"
+            }).done(res=>{
+
+               // 사진 전송 성공시 이미지 변경
+               let reader = new FileReader();
+               reader.onload = (e) => { 
+                  $("#profile-image-url").attr("src", e.target.result);
+               }
+               reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
+            });
+
+         });
+      });
+   }
+
+
+
+

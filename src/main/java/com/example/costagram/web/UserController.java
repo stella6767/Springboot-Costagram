@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.costagram.config.auth.PrincipalDetails;
 import com.example.costagram.domain.follow.Follow;
@@ -72,5 +73,14 @@ public class UserController {
 	
 		return new CMRespDto<>(1, null);
 	}
+	
+	   @PutMapping("/user/{id}/profileImageUrl")
+	   public @ResponseBody CMRespDto<?> profileImageUrlUpdate(@PathVariable int id, MultipartFile profileImageFile, @AuthenticationPrincipal PrincipalDetails principalDetails){
+	      System.out.println("파일 받기 : "+profileImageFile.getOriginalFilename());
+	      
+	      User userEntity = userService.회원사진변경(profileImageFile, principalDetails);
+	      principalDetails.setUser(userEntity); //세션 값에 저장된 imagProfile도 변경함으로서 세션 이미지를 들고있는 jsp 경로 모두 변경
+	      return new CMRespDto<>(1, null);
+	   }
 	
 }

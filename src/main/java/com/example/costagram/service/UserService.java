@@ -1,12 +1,25 @@
 package com.example.costagram.service;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.example.costagram.config.auth.PrincipalDetails;
 import com.example.costagram.domain.follow.FollowReposiotry;
+import com.example.costagram.domain.image.Image;
+import com.example.costagram.domain.tag.Tag;
 import com.example.costagram.domain.user.User;
 import com.example.costagram.domain.user.UserRepository;
+import com.example.costagram.utils.TagUtils;
+import com.example.costagram.web.dto.image.ImageReqDto;
 import com.example.costagram.web.dto.user.UserProfileRespDto;
 import com.example.costagram.web.dto.user.UserUpdateReqDto;
 
@@ -20,6 +33,34 @@ public class UserService {
 	private final FollowReposiotry followRepository;
 	
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	
+	@Value("${file.path}")  //@Value 안의 ${} 안으로 application.yml 의 value값 바로 땡겨올 수 있음.     
+	private String uploadFolder;
+
+	@Transactional
+	public User 회원사진변경(MultipartFile profileImageFile, PrincipalDetails principalDetails) {
+
+		UUID uuid = UUID.randomUUID(); //같은 이름의 사진이 들어오면 충돌나므로 방지하기 위해
+		String imageFileName = uuid+"_"+profileImageFile.getOriginalFilename();
+		System.out.println("파일명 : "+imageFileName);
+
+		Path imageFilePath = Paths.get(uploadFolder+imageFileName);
+		System.out.println("파일패스 : "+imageFilePath);
+		try {
+			Files.write(imageFilePath, profileImageFile.getBytes());
+			System.out.println();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		User userEntity = userRepository.findById(principalDetails.getUser().getId()).get();
+		userEntity.setProfileImageUrl(imageFileName); //풀경로는 안넣어도 되는게, 
+		
+		return userEntity;
+	}//더티체킹 
+	
+	
 	
 	@Transactional(readOnly = true)
 	public UserProfileRespDto 회원프로필(int userId, int principalId) {
