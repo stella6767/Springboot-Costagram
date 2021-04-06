@@ -6,6 +6,8 @@
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,6 +35,8 @@
 </head>
 
 <body>
+<input type="hidden" id="principal-id" value="${principal.user.id}"/>
+<input type="hidden" id="principal-username" value="${principal.user.username}"/>
 	<header class="header">
 		<div class="container">
 			<a href="/image/feed" class="logo">

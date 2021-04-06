@@ -52,7 +52,7 @@ public class User {
 	private String role; //USER, ADMIN
 	
 
-	@JsonIgnoreProperties({"image"})
+	//@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Image> images;
 		
